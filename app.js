@@ -13,22 +13,18 @@
     
     let paragrafo = document.querySelector('p');
     paragrafo.innerHTML = "Insira um número de 1 à 10.";
+
+    função anonima, e arrow function.
 */
 
 
 // Inserindo textos nos elementos html (titulo e paragrafo)
-alterarTexto('h1', 'Jogo do Número Secreto');
-alterarTexto('p', 'Insira um número de 1 à 10.');
+exibirMensagemInicial();
 
 // Gerar um número aleatório.
 let numeroSecreto = gerarNumeroRandom();
+let tentativas = 1;
 
-// Configurar botão reiniciar
-let botao = document.getElementById('btn-reiniciar');
 
-// Precisamos pegar o evento do botão porque não pode dois onclick no mesmo form.
-// Ele fica esperando, quando escutar o 'click', chama a função reiniciar.
-botao.addEventListener('click', reiniciar);
 
-// Aonde vai exibir a mensagem?
 

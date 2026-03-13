@@ -8,35 +8,61 @@ function gerarNumeroRandom (){
     return parseInt(Math.random() * 10 + 1);
 }
 
+function limparCampo(campo){
+    campo.value = '';
+}
+
+function exibirMensagemInicial (){
+
+    alterarTexto('h1', 'Jogo do Número Secreto');
+    alterarTexto('p', 'Insira um número de 1 à 10.');
+}
+
 function verificarChute(){
 
-    let valorDigitado = document.querySelector('input').value;
+    let campo = document.querySelector('input')
+    let valorDigitado = campo.value;
 
     // Ou eu faço uma recursão, ou eu faço um while.
     if (valorDigitado == numeroSecreto) {
-        alert(`Você acertou, o número secreto é: ${numeroSecreto}!`);
-        // Limpar o input;
+
+        let palavraTentativas = tentativas > 1 ? 'tentativas':'tentativa';
+        // O innerHTML não reconhece variavel do tipo nmber
+        //  com isto tive que colocar tudo dentro de uma variavel string
+        let mensagem = `Você descobriu o número secreto com ${tentativas} ${palavraTentativas}!`;
+
+        alterarTexto('h1', 'Você acertou!');
+        alterarTexto('p', mensagem);
         // Habilitar o botao Reiniciar
+        document.getElementById('btn-reiniciar').removeAttribute('disabled');
     }else{
-
-        if (valorDigitado > numeroSecreto) {
-            alert(`Número secreto é menor que: ${valorDigitado}`);
-        }else if (valorDigitado < numeroSecreto) {
-            alert(`Número secreto é maior que: ${valorDigitado}`);
-        }
         
-        // Limpar o input;
+        if (valorDigitado > numeroSecreto) {
+            alterarTexto('p', `Número secreto é menor.`);
+        }else {
+            alterarTexto('p', `Número secreto é maior.`);
+        }        
+        tentativas++;
     }
-
+    
+    limparCampo(campo);
+    // Limpar o input;
 }
 
 function reiniciar(){
 
+    exibirMensagemInicial();
+
     // Limpar valor do Input
+    limparCampo(document.querySelector('input'));
     // Gerar novo número secreto
-    // Verificar chute
     numeroSecreto = gerarNumeroRandom();
+    // Zerar números de tentativas:
+    tentativas = 1;
+    // Verificar chute
     verificarChute();
+
+    document.getElementById('btn-reiniciar').setAttribute('disabled', true);
 }
 
 
@@ -83,7 +109,6 @@ const getMaxArrow = (a, b) => {
 }
 // Arrow function curta com ternário
 const getMaxShort = (a, b) => a > b ? a:b;
-
 function media (notas){
 
     let divisor = notas.length;
@@ -94,5 +119,4 @@ function media (notas){
 
     return soma / divisor;
 }
-
 const multPorEleMesmo = (numero) => numero * numero;
