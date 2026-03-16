@@ -4,8 +4,27 @@ function alterarTexto(tag, texto){
     elemento.innerHTML = texto;
 }
 
+// Verificar se o número gerado, já foi gerado anteriormente
+let listaDeNumerosJaSorteados = [];
+let numeroLimite = 10;
 function gerarNumeroRandom (){
-    return parseInt(Math.random() * 10 + 1);
+
+    let numeroGerado = parseInt(Math.random() * numeroLimite + 1);
+    let tamanhoLista = listaDeNumerosJaSorteados.length;
+
+    if (tamanhoLista == numeroLimite) {
+        listaDeNumerosJaSorteados = [];
+    }
+
+    if (listaDeNumerosJaSorteados.includes(numeroGerado)) {
+        // recursão
+        return gerarNumeroRandom();
+    } else {
+
+        listaDeNumerosJaSorteados.push(numeroGerado);
+        return numeroGerado;
+    }
+
 }
 
 function limparCampo(campo){
@@ -64,3 +83,12 @@ function reiniciar(){
 
     document.getElementById('btn-reiniciar').setAttribute('disabled', true);
 }
+
+/*
+Aprendemos:
+
+    1. Funções
+    2. Listas (Arrays)
+    3. Recursão
+
+*/
