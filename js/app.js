@@ -1,22 +1,28 @@
-function alterarTexto(tag, texto){
+/* 
+    =============
+       ANOTAÇÃO
+    =============
 
-    let elemento = document.querySelector(tag);
-    elemento.innerHTML = texto;
-}
+ Query Selector: Retorna o primeiro elemento html h1
+ InnerHTML: Insere um texto no arquivo HTML, dentro da tag 'h1'
+ 
+ Código refatorado -> funcao alterarTexto():
 
-function gerarNumeroRandom (){
-    return parseInt(Math.random() * 10 + 1);
-}
+    let titulo = document.querySelector('h1');
+    titulo.innerHTML = "Jogo do Número Secreto";
+    
+    let paragrafo = document.querySelector('p');
+    paragrafo.innerHTML = "Insira um número de 1 à 10.";
 
-function limparCampo(campo){
-    campo.value = '';
-}
+    função anonima, e arrow function.
+*/
 
-function exibirMensagemInicial (){
+// Inserindo textos nos elementos html (titulo e paragrafo)
+exibirMensagemInicial();
 
-    alterarTexto('h1', 'Jogo do Número Secreto');
-    alterarTexto('p', 'Insira um número de 1 à 10.');
-}
+// Gerar um número aleatório.
+let numeroSecreto = gerarNumeroRandom();
+let tentativas = 1;
 
 function verificarChute(){
 
@@ -49,18 +55,4 @@ function verificarChute(){
     // Limpar o input;
 }
 
-function reiniciar(){
 
-    exibirMensagemInicial();
-
-    // Limpar valor do Input
-    limparCampo(document.querySelector('input'));
-    // Gerar novo número secreto
-    numeroSecreto = gerarNumeroRandom();
-    // Zerar números de tentativas:
-    tentativas = 1;
-    // Verificar chute
-    verificarChute();
-
-    document.getElementById('btn-reiniciar').setAttribute('disabled', true);
-}
